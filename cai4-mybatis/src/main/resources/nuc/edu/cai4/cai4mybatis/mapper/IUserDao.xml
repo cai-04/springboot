@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nuc.edu.cai4.cai4mybatis.mapper.IUserDao">
+
+    <!--<resultMap id="userMap" type="User">
+        <id column="id" property="id"></id>
+        <result column="user_name" property="user_name"></result>
+        <collection property="ordersList" ofType="orders" select="nuc.edu.cai4.cai4mybatis.mapper.IOrdersDao.findOrderId" column="id">
+        </collection>
+    </resultMap>
+
+    <sql id="userM">
+        user_name as user_name
+    </sql>-->
+
+    <!--<select id="findAllUser" resultMap="userMap">
+        select id,user_name ,sex from user
+    </select>-->
+
+   <!-- <select id="findAllUser" resultMap="userMap">
+        select
+        <include refid="userM"/>
+        from user
+    </select>
+
+    <select id="getUserbyNameandSex" resultType="nuc.edu.cai4.cai4mybatis.domain.User">
+        select * from user
+         <where>
+             if(test(user_name!=null)) {
+             user_name=#{user_name}
+             }
+             and
+             if(test(sex!=null)) {
+             sex=#{sex}
+             }
+         </where>
+
+
+    </select>
+
+    <select id="getUserOrders" resultType="nuc.edu.cai4.cai4mybatis.domain.User">
+        select  * from user inner join orders where user.id=orders.user_id
+    </select>-->
+
+
+    <select id="getUser" parameterType="Integer" resultType="nuc.edu.cai4.cai4mybatis.domain.User">
+        select id,user_name ,sex from user where id=#{id}
+    </select>
+
+    <select id="findAllUser" resultType="nuc.edu.cai4.cai4mybatis.domain.User">
+        select id,user_name ,sex from user
+    </select>
+
+    <select id="findUsers" resultType="nuc.edu.cai4.cai4mybatis.domain.User">
+        select id,user_name ,sex from user where user_name like concat('%',#{user_name},'%') and sex like concat('%',#{sex},'%')
+    </select>
+
+
+    <insert id="insertUser" parameterType="nuc.edu.cai4.cai4mybatis.domain.User" useGeneratedKeys="true" keyProperty="id">
+        insert into user(user_name,sex) values(#{user_name},#{sex})
+    </insert>
+
+    <delete id="deleteUser" parameterType="Integer">
+    delete from user where id=#{id}
+    </delete>
+    
+    <update id="updateUser" parameterType="User"  useGeneratedKeys="true" keyProperty="id">
+        update user  set user_name=#{user_name},sex=#{sex} where id=#{id}
+    </update>
+
+   <!-- <insert id="insertUser" useGeneratedKeys="true" keyColumn="id">
+        <insert id="insertUser">
+            <selectKey keyProperty="id" keyColumn="id" resultType="int">
+                       select last_insert_id();
+            </selectKey>
+            insert into user(user_name)
+            values(#{userName})
+        </insert>
+    </insert>-->
+</mapper>

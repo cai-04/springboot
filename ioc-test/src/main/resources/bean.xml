@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+<bean id="student" class="nuc.edu.cai4.ioctest.domain.Student">
+    <!-- 基于构造函数-->
+<!--<constructor-arg name="stu_id" value="11"> </constructor-arg>
+    <constructor-arg name="stu_name" value="cai4"> </constructor-arg>-->
+    <!-- 基于属性的注入-->
+    <property name="stu_name" value="cai4"> </property>
+        <property name="stu_id" value="11"> </property>
+</bean>
+</beans>

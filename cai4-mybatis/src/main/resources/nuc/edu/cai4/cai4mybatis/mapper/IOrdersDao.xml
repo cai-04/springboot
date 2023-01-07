@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="nuc.edu.cai4.cai4mybatis.mapper.IOrdersDao">
+
+    <resultMap id="userMap" type="User">
+        <id column="id" property="id"></id>
+        <result column="user_name" property="user_name"></result>
+        <collection property="ordersList" ofType="orders" select="nuc.edu.cai4.cai4mybatis.mapper.IUserDao.getUserOrders" column="id">
+        </collection>
+    </resultMap>
+
+
+
+    <select id="getUserOrders" resultType="nuc.edu.cai4.cai4mybatis.domain.User">
+        select  * from user inner join orders where user.id=orders.user_id
+    </select>
+    <select id="findOrderId" resultType="nuc.edu.cai4.cai4mybatis.domain.Orders">
+        select * from  orders where  id=#{id}
+    </select>
+
+</mapper>
